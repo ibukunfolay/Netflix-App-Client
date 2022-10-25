@@ -4,10 +4,13 @@ import './home.scss';
 import Featured from '../../Components/Featured/Featured';
 import List from '../../Components/List/List';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Home = ({ type }) => {
   const [lists, setLists] = useState([]);
   const [genre, setGenre] = useState(null);
+  const userdata = Cookies.get('user');
+  const user = JSON.parse(userdata);
 
   useEffect(() => {
     const getRandomLists = async () => {
@@ -18,8 +21,7 @@ const Home = ({ type }) => {
           }`,
           {
             headers: {
-              authorization:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTA2MzY3NjcwZDRhNTliMWZkYzM5YiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NjI2MjkwOSwiZXhwIjoxNjY2NDM1NzA5fQ.NO1LPU_S2lAf-0cFa0uM2hMngL6lrPHOGImoWBWPp0o',
+              authorization: `Bearer ${user.token}`,
             },
           },
         );

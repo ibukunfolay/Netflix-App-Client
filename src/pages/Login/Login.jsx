@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './login.scss';
 import logo from '../../assets/Netflix-Logo.svg';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signin } from '../../redux/actions/userActions';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const signIn = useSelector((state) => state.userSignin);
+  const { user, error, loading } = signIn;
+
+  const handleFinish = (e) => {
+    e.preventDefault();
+    dispatch(signin(email, password));
+    // console.log(email, password);
+  };
+
   return (
     <div className="login">
       <div className="login__top">
@@ -11,15 +27,23 @@ const Login = () => {
         </div>
       </div>
       <div className="login__container">
-        <form action="submit">
-          <h1>Sign In</h1>
+        <form method="post" onSubmit={handleFinish}>
+          <h1>Sign up</h1>
           <input
             type="email"
             name="email"
             placeholder="Email or phone number"
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <input type="password" name="password" placeholder="Password" />
-          <button className="loginButton">Sign In</button>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit" className="loginButton">
+            Sign In
+          </button>
           <span>
             New to Netflix? <b>Sign up now.</b>
           </span>

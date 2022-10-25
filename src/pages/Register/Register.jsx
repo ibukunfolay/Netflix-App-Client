@@ -1,27 +1,50 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './register.scss';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../assets/Netflix-Logo.svg';
+import { signup } from '../../redux/actions/userActions';
 
 const Register = () => {
   const emailRef = useRef();
-  const passwordRef = useRef();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const signUp = useSelector((state) => state.userSignup);
+  const { user, error, loading } = signUp;
 
   const handleStart = () => {
     setEmail(emailRef.current.value);
   };
 
-  const handleFinish = () => {
-    setPassword(passwordRef.current.value);
+  const handleFinish = (e) => {
+    e.preventDefault();
+    dispatch(signup(email, password, username));
+    // console.log({ email: email, username: username, password: password });
   };
+
+  useEffect(() => {
+    try {
+      if (user) {
+        navigate('/login');
+      } else {
+        console.log(error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [user]);
 
   return (
     <div className="register">
       <div className="register__top">
         <div className="register__top-wrapper">
           <img src={logo} alt="" className="logo" />
-          <button className="login-button">Sign In</button>
+          <button className="login-button" onClick={() => navigate('/login')}>
+            Sign In
+          </button>
         </div>
       </div>
       <div className="register__container">
@@ -45,15 +68,29 @@ const Register = () => {
             </button>
           </div>
         ) : (
-          <form className="register__container-input">
+          <form
+            method="post"
+            className="register__container-input"
+            onSubmit={handleFinish}
+          >
+            <input
+              type="text"
+              name="username"
+              className="email"
+              placeholder="username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
             <input
               type="password"
               name="password"
               className="email"
               placeholder="password"
-              ref={passwordRef}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <button className="registerButton" onClick={() => handleFinish()}>
+            <button
+              // disabled={loading}
+              className="registerButton"
+            >
               Submit
             </button>
           </form>

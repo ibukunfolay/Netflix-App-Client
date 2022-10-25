@@ -5,17 +5,19 @@ import { IoIosInformationCircleOutline, IoMdPlay } from 'react-icons/io';
 import './featured.scss';
 import { genres } from '../../data';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Featured = ({ type }) => {
   const [content, setContent] = useState({});
+  const userdata = Cookies.get('user');
+  const user = JSON.parse(userdata);
 
   useEffect(() => {
     const getRandomMovie = async () => {
       try {
         const res = await axios.get(`/api/movies/random?type=${type}`, {
           headers: {
-            authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTA2MzY3NjcwZDRhNTliMWZkYzM5YiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NjI2MjkwOSwiZXhwIjoxNjY2NDM1NzA5fQ.NO1LPU_S2lAf-0cFa0uM2hMngL6lrPHOGImoWBWPp0o',
+            authorization: `Bearer ${user.token}`,
           },
         });
         setContent(res.data[0]);

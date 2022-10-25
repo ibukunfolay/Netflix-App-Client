@@ -7,18 +7,20 @@ import {
 } from 'react-icons/md';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const ListItem = ({ index, item }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [movie, setMovie] = useState({});
+  const userdata = Cookies.get('user');
+  const user = JSON.parse(userdata);
 
   useEffect(() => {
     const getMovie = async () => {
       try {
         const res = await axios.get('/api/movies/find/' + item, {
           headers: {
-            authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTA2MzY3NjcwZDRhNTliMWZkYzM5YiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NjI2MjkwOSwiZXhwIjoxNjY2NDM1NzA5fQ.NO1LPU_S2lAf-0cFa0uM2hMngL6lrPHOGImoWBWPp0o',
+            authorization: `Bearer ${user.token}`,
           },
         });
         setMovie(res.data);
