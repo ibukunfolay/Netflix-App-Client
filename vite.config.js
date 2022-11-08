@@ -5,11 +5,12 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: true,
+    port: 5173,
     proxy: {
       '/api': {
-        target: 'http://netflix-ibk-api.herokuapp.com',
+        target: 'https://netflix-ibk-api.herokuapp.com',
         changeOrigin: true,
-        secure: false,
       },
     },
   },
