@@ -18,11 +18,14 @@ const ListItem = ({ index, item }) => {
   useEffect(() => {
     const getMovie = async () => {
       try {
-        const res = await axios.get('/api/movies/find/' + item, {
-          headers: {
-            authorization: `Bearer ${user.token}`,
+        const res = await axios.get(
+          'https://netflix-ibk-api.herokuapp.com/api/movies/find/' + item,
+          {
+            headers: {
+              authorization: `Bearer ${user.token}`,
+            },
           },
-        });
+        );
         setMovie(res.data);
       } catch (error) {
         console.log(error);

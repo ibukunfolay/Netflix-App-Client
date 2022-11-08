@@ -15,11 +15,14 @@ const Featured = ({ type }) => {
   useEffect(() => {
     const getRandomMovie = async () => {
       try {
-        const res = await axios.get(`/api/movies/random?type=${type}`, {
-          headers: {
-            authorization: `Bearer ${user.token}`,
+        const res = await axios.get(
+          `https://netflix-ibk-api.herokuapp.com/api/movies/random?type=${type}`,
+          {
+            headers: {
+              authorization: `Bearer ${user.token}`,
+            },
           },
-        });
+        );
         setContent(res.data[0]);
         console.log(res);
       } catch (error) {
