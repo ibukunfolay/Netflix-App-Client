@@ -25,11 +25,18 @@
       img {
         height: 85px;
         margin-right: 40px;
+        @media screen and (max-width: 460px) {
+          height: 60px;
+        }
       }
 
       span {
         margin-right: 20px;
         cursor: pointer;
+
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
       }
     }
 
@@ -40,6 +47,9 @@
       .navbar__icon {
         margin: 0px 15px;
         cursor: pointer;
+        @media screen and (max-width: 460px) {
+          display: none;
+        }
       }
 
       img {
@@ -69,6 +79,15 @@
           }
         }
       }
+      @media screen and (max-width: 460px) {
+        span {
+          display: none;
+        }
+      }
+    }
+
+    @media screen and (max-width: 460px) {
+      padding: 0 10px;
     }
   }
 }

@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { MdNotifications } from 'react-icons/md';
 import logo from '../../assets/Netflix-Logo.svg';
-import profile from '../../assets/profile.jpg';
+import profile from '../../assets/profile.png';
 
 const Navbar = () => {
   const navigate = useNavigate();

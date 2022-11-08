@@ -21,7 +21,7 @@ const Featured = ({ type }) => {
           },
         });
         setContent(res.data[0]);
-        // console.log(res);
+        console.log(res);
       } catch (error) {
         console.log(error);
       }
