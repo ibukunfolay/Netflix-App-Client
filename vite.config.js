@@ -7,8 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://netflix-ibk-api.herokuapp.com',
-        changeOrigin: true,
+        origin: 'https://netflix-ibk-api.herokuapp.com',
+        // changeOrigin: true,
       },
     },
   },
