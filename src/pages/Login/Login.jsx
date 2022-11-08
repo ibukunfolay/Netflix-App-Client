@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './login.scss';
 import logo from '../../assets/Netflix-Logo.svg';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../../redux/actions/userActions';
 
@@ -45,7 +45,10 @@ const Login = () => {
             Sign In
           </button>
           <span>
-            New to Netflix? <b>Sign up now.</b>
+            New to Netflix?{' '}
+            <Link to="/register">
+              <b>Sign up now.</b>
+            </Link>
           </span>
           <small>
             This page is protected by Google reCAPTCHA to ensure you're not a
