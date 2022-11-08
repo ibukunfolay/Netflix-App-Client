@@ -19,7 +19,7 @@ const Navbar = () => {
 
   const logout = () => {
     cookie.set('user', null);
-    window.location.reload(true);
+    navigate('/');
   };
 
   return (
