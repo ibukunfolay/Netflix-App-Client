@@ -42,7 +42,11 @@ const Register = () => {
       <div className="register__top">
         <div className="register__top-wrapper">
           <img src={logo} alt="" className="logo" />
-          <button className="login-button" onClick={() => navigate('/login')}>
+          <button
+            type="button"
+            className="login-button"
+            onClick={() => navigate('/login')}
+          >
             Sign In
           </button>
         </div>
