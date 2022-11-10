@@ -45,7 +45,7 @@ const Featured = ({ type }) => {
         </div>
       )}
 
-      <img src={content.img} alt="" width="100%" />
+      <img src={content.img} alt="featured" />
       <div className="featured__info">
         <img src={content.imgTitle} alt="" />
         <span className="featured__info-desc">{content.desc}</span>
